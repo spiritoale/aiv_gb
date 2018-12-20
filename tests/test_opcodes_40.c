@@ -64,8 +64,8 @@ TEST(ld_in_b_e)
 
     aiv_gb_tick(&gb);
 
-    ASSERT_THAT(gb.e == 1);
     ASSERT_THAT(gb.b == 1);
+    ASSERT_THAT(gb.e == 1);
     ASSERT_THAT(gb.ticks == 4);
     ASSERT_THAT(gb.pc == 1);
 }
@@ -98,8 +98,8 @@ TEST(ld_in_b_l)
 
     aiv_gb_tick(&gb);
 
-    ASSERT_THAT(gb.l == 1);
     ASSERT_THAT(gb.b == 1);
+    ASSERT_THAT(gb.l == 1);
     ASSERT_THAT(gb.ticks == 4);
     ASSERT_THAT(gb.pc == 1);
 }
@@ -139,6 +139,24 @@ TEST(ld_in_b_a)
     ASSERT_THAT(gb.pc == 1);
 }
 
+TEST(ld_in_c_b)
+{
+    aiv_gameboy gb;
+    aiv_gb_init(&gb);
+
+    gb.c = 2;
+    gb.b = 1;
+
+    gb.cartridge[0] = 0x48;
+
+    aiv_gb_tick(&gb);
+
+    ASSERT_THAT(gb.c == 1);
+    ASSERT_THAT(gb.b == 1);
+    ASSERT_THAT(gb.ticks == 4);
+    ASSERT_THAT(gb.pc == 1);
+}
+
 TEST(ld_in_c_c)
 {
     aiv_gameboy gb;
@@ -154,6 +172,7 @@ TEST(ld_in_c_c)
     ASSERT_THAT(gb.ticks == 4);
     ASSERT_THAT(gb.pc == 1);
 }
+
 TEST(ld_in_c_d)
 {
     aiv_gameboy gb;
@@ -168,24 +187,6 @@ TEST(ld_in_c_d)
 
     ASSERT_THAT(gb.c == 1);
     ASSERT_THAT(gb.d == 1);
-    ASSERT_THAT(gb.ticks == 4);
-    ASSERT_THAT(gb.pc == 1);
-}
-
-TEST(ld_in_c_b)
-{
-    aiv_gameboy gb;
-    aiv_gb_init(&gb);
-
-    gb.c = 2;
-    gb.b = 1;
-
-    gb.cartridge[0] = 0x4a;
-
-    aiv_gb_tick(&gb);
-
-    ASSERT_THAT(gb.c == 1);
-    ASSERT_THAT(gb.b == 1);
     ASSERT_THAT(gb.ticks == 4);
     ASSERT_THAT(gb.pc == 1);
 }
@@ -207,6 +208,7 @@ TEST(ld_in_c_e)
     ASSERT_THAT(gb.ticks == 4);
     ASSERT_THAT(gb.pc == 1);
 }
+
 TEST(ld_in_c_h)
 {
     aiv_gameboy gb;
